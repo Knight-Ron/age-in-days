@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Age & Birthday Calculator</title>
+
+    <!-- Import a medieval-style font for the vintage aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <style>
+        /* Overall page styling: centered layout, medieval theme */
+        body {
+            font-family: 'MedievalSharp', cursive;
+            background-color: #f3eac2; /* light parchment tone */
+            color: #3e2f1c; /* dark brown text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Main heading with stylized shadow */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px #aa8453;
+        }
+
+        /* Form container with subtle box shadow and border */
+        form {
+            background-color: #fff7db;
+            border: 2px solid #d2b48c;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(85, 70, 40, 0.2);
+            width: 300px;
+        }
+
+        /* Input and button styling */
+        input[type="date"], button {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            border: 1px solid #bfa77a;
+            font-family: 'MedievalSharp', cursive;
+        }
+
+        /* Button color and hover effect */
+        button {
+            background-color: #bfa77a;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #a38561;
+        }
+
+        /* Box to show the result after calculation */
+        .result {
+            margin-top: 1rem;
+            background-color: #fff2d9;
+            padding: 1rem;
+            border: 1px solid #c4a766;
+            border-radius: 5px;
+        }
+
+        /* Footer style for subtle credits */
+        footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main heading for the page -->
+    <h1>Know Thy Age</h1>
+
+    <!-- Form to submit date of birth to the server -->
+    <form th:action="@{/calculate}" method="post">
+        <label for="dob">Enter Thy Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        <button type="submit">Reveal My Age</button>
+
+        <!-- Show result only when 'age' is set -->
+        <div class="result" th:if="${years}">
+            <p><strong>Thine Age:</strong> 
+                <span th:text="${years} + ' years, ' + ${days} + ' days, ' + ${hours} + ' hours'"></span>
+            </p>
+            <p><strong>Next Birthday in:</strong> 
+                <span th:text="${nextMonths} + ' months, ' + ${nextDays} + ' days'"></span>
+            </p>
+        </div>
+    </form>
+
+    <!-- Footer signature -->
+    <footer>
+    ⛨ Crafted by <a href="https://github.com/Knight-Ron" target="_blank" style="color: #3e2222; text-decoration: underline;">Knight Ron</a>
+</footer>
+
+</body>
+</html>
